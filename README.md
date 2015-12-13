@@ -11,7 +11,7 @@ Add the following dependency to your composer.json:
 "cosmologist/russian-post": "dev-master"
 ```
 
-## Example
+## Usage
 ```php
 <?php
 
