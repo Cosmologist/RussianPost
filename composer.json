@@ -1,0 +1,18 @@
+{
+    "name": "cosmologist/russian-post",
+    "authors": [
+        {
+            "name": "Cosmologist",
+            "email": "sunfundev@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "guzzlehttp/guzzle": "^6.1@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cosmologist\\": "src/"
+        }
+    }
+}
