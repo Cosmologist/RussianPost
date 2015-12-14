@@ -17,10 +17,7 @@ Add the following dependency to your composer.json:
 
 use GuzzleHttp\Client;
 
-$rp = new \Cosmologist\RussianPost(
-    new Client(),
-    'https://www.pochta.ru/portal-portlet/delegate/calculator/v1/api/delivery.time.cost.get'
-);
+$rp = new \Cosmologist\RussianPost(new Client());
 
 $fromIndex = 107031;
 $toIndex = 614016;
