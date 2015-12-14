@@ -61,7 +61,7 @@ class RussianPost
                 'parcelKind' => 'STANDARD',
                 'postalCodesFrom' => [$fromIndex],
                 'postalCodesTo' => [$toIndex],
-                'postingCategory' => 'WITH_DECLARED_VALUE',
+                'postingCategory' => ($cashOnDeliverySum > 0 ? 'WITH_DECLARED_VALUE' : 'ORDINARY'),
                 'postingKind' => 'PARCEL',
                 'postingType' => 'VPO',
                 'wayForward' => 'EARTH',
