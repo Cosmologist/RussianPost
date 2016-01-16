@@ -30,7 +30,7 @@ class RussianPost
      * @param Client $client Guzzle HTTP-client
      * @param string $apiUrl Russian post API URL
      */
-    public function __construct(Client $client, $apiUrl='https://www.pochta.ru/calculator/v1/api/delivery.time.cost.get')
+    public function __construct(Client $client, $apiUrl='https://www.pochta.ru/portal-portlet/delegate/calculator/v1/api/delivery.time.cost.get')
     {
         $this->client = $client;
         $this->apiUrl = $apiUrl;
