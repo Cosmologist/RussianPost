@@ -1,6 +1,6 @@
 <?php
 
-namespace Cosmologist;
+namespace Cosmologist\RussianPost;
 
 use GuzzleHttp\Client;
 use RuntimeException;
@@ -8,7 +8,7 @@ use RuntimeException;
 /**
  * Class for the russian post delivery calculation
  */
-class RussianPost
+class Calculator
 {
     /**
      * Guzzle client

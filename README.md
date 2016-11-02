@@ -17,7 +17,7 @@ Add the following dependency to your composer.json:
 
 use GuzzleHttp\Client;
 
-$rp = new \Cosmologist\RussianPost(new Client());
+$rp = new \Cosmologist\RussianPost\Calculator(new Client());
 
 $fromIndex = 107031;
 $toIndex = 614016;

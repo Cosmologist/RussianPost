@@ -8,11 +8,12 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "guzzlehttp/guzzle": "^6.1@dev"
+        "guzzlehttp/guzzle": "^6.1@dev",
+        "mikehaertl/php-pdftk": "^0.3.2"
     },
     "autoload": {
         "psr-4": {
-            "Cosmologist\\": "src/"
+            "Cosmologist\\RussianPost": "src/"
         }
     }
 }
