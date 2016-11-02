@@ -1,23 +1,39 @@
 # RussianPost
-Russian Post delivery cost calculation
+Russian Post helper library
 
-Простая библиотека для расчета стоимости доставки посылки Почтой России.
-Позволяет узнать стоимость доставки основываясь на индексе отправителя и индексе получателя, также может учитывать наложенный платеж и страхование посылки.
+Возможности библиотеки:
+ - Заполнение формы наложенного платежа
+ - Получение стоимости доставки основываясь на индексе отправителя и индексе получателя, также может учитывать наложенный платеж и страхование посылки. *после очередных изменений на сервере почты России - не работает, можете поправить*
 
-## Installation
-Add the following dependency to your composer.json:
-
+## Установка
 ```
-"cosmologist/russian-post": "dev-master"
+composer require "cosmologist/russian-post:dev-master"
 ```
 
-## Usage
+## Использование
+
+### Заполнение формы наложенного платежа
 ```php
-<?php
+$filler = new Cosmologist\RussianPost\RemittanceFiller();
+$filler
+    ->setAmount(9872.35) // Сумма наложенного платежа
+    ->setRemittance(true) // Флаг "Наложенный платеж"
+    ->setWithDelivery(true) // Флаг "C доставкой"
+    ->setWithNotification(true) // Флаг "C уведомлением"
+    ->setFromAddress('Россия, г. Москва, ул. Белых партизан, д. 18, кв. 116') // Адрес отправителя
+    ->setFromAddressPostalCode(123456) // Индекс отправителя
+    ->setFromName('Петров Петр Петрович') // Имя отправителя
+    ->setToAddress('Россия, г. Саратов, ул. Ленина, д. 1, кв. 3') // Адрес получателя
+    ->setToAddressPostalCode(987654) // Индекс получателя
+    ->setToName('Иванов Иван Иванович') // Имя получателя
+;
 
-use GuzzleHttp\Client;
+$filler->save('/tmp/pdf/1.pdf');
+```
 
-$rp = new \Cosmologist\RussianPost\Calculator(new Client());
+### Получение стоимости доставки
+```php
+$rp = new \Cosmologist\RussianPost\Calculator(new GuzzleHttp\Client());
 
 $fromIndex = 107031;
 $toIndex = 614016;
