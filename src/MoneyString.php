@@ -7,12 +7,12 @@ namespace Cosmologist\RussianPost;
  *
  * @see https://habrahabr.ru/post/53210/
  */
-class NumericString
+class MoneyString
 {
     /**
      * Возвращает сумму прописью
      */
-    public static function convert($num)
+    public static function convert($amount, $keepKop = true)
     {
         $nul     = 'ноль';
         $ten     = array(
@@ -30,7 +30,7 @@ class NumericString
             array('миллиард', 'милиарда', 'миллиардов', 0),
         );
         //
-        list($rub, $kop) = explode('.', sprintf("%015.2f", floatval($num)));
+        list($rub, $kop) = explode('.', sprintf("%015.2f", floatval($amount)));
         $out = array();
         if (intval($rub) > 0) {
             foreach (str_split($rub, 3) as $uk => $v) { // by 3 symbols
@@ -47,7 +47,9 @@ class NumericString
             } //foreach
         } else $out[] = $nul;
         $out[] = self::morph(intval($rub), $unit[1][0], $unit[1][1], $unit[1][2]); // rub
-        $out[] = $kop . ' ' . self::morph($kop, $unit[0][0], $unit[0][1], $unit[0][2]); // kop
+        if ($keepKop) {
+            $out[] = $kop . ' ' . self::morph($kop, $unit[0][0], $unit[0][1], $unit[0][2]); // kop
+        }
         return trim(preg_replace('/ {2,}/', ' ', join(' ', $out)));
     }
 

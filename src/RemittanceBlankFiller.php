@@ -7,7 +7,7 @@ use mikehaertl\pdftk\Pdf;
 /**
  * Fill the remittance form (112EP)
  */
-class RemittanceFiller
+class RemittanceBlankFiller
 {
     /**
      * Form data
@@ -40,7 +40,7 @@ class RemittanceFiller
      */
     public function setAmount($amount)
     {
-        $this->data['пропись'] = NumericString::convert($amount);
+        $this->data['пропись'] = MoneyString::convert($amount);
         $this->data['руб']     = (int) $amount;
         $this->data['коп']     = str_pad((int) ($amount - floor($amount)) * 100, 2, 0);
 
