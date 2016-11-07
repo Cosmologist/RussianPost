@@ -139,7 +139,7 @@ class AddressBlankFiller
     public function setDeclaredValueAmount($amount)
     {
         $this->data['SummInsured_46bc2a61-57f6-4b33-914f-f9fcb441d36f_94b61db7-4742-45c3-a499-42b4fb3701f2'] =
-            MoneyString::convert((int) $amount, false);
+            MoneyString::convert((int)$amount, false);
 
         return $this;
     }
@@ -154,7 +154,7 @@ class AddressBlankFiller
     public function setCashOnDeliveryAmount($amount)
     {
         $this->data['SummCashOnDelivery_46bc2a61-57f6-4b33-914f-f9fcb441d36f_94b61db7-4742-45c3-a499-42b4fb3701f2'] =
-            MoneyString::convert((int) $amount, false);
+            MoneyString::convert((int)$amount, false);
 
         return $this;
     }
@@ -166,7 +166,7 @@ class AddressBlankFiller
      *
      * @return $this
      */
-    public function setFromAddress($address)
+    public function setFromAddress($address, $splitSeparator = ',')
     {
         $this->data['SenderAddress_46bc2a61-57f6-4b33-914f-f9fcb441d36f_94b61db7-4742-45c3-a499-42b4fb3701f2'] = $address;
 
@@ -204,13 +204,46 @@ class AddressBlankFiller
     /**
      * Set to address (Адрес куда, без индекса)
      *
-     * @param string $address Address without postal-code
+     * @param string $address        Address without postal-code
+     * @param string $splitSeparator Address separator char (for splitting addresses by rows)
      *
      * @return $this
      */
-    public function setToAddress($address)
+    public function setToAddress($address, $splitSeparator = ',')
     {
-        $this->data['RecipientAddress_46bc2a61-57f6-4b33-914f-f9fcb441d36f_94b61db7-4742-45c3-a499-42b4fb3701f2'] = $address;
+        $lineCharsLimit   = 60;
+        $addressSeparator = ', ';
+
+        $line  = '';
+        $lines = [];
+        $parts = explode($splitSeparator, $address);
+        foreach ($parts as $part) {
+            $part = trim($part);
+
+            if ((strlen($line) + strlen($part) + strlen($addressSeparator)) > $lineCharsLimit) {
+                $lines[] = $line;
+                $line    = '';
+            }
+
+            if (strlen($line) !== 0) {
+                $line .= $addressSeparator;
+            }
+            $line .= $part;
+        }
+        $lines[] = $line;
+
+        if (isset($lines[0])) {
+            $this->data['RecipientAddress_46bc2a61-57f6-4b33-914f-f9fcb441d36f_94b61db7-4742-45c3-a499-42b4fb3701f2']
+                = $lines[0];
+        }
+        if (isset($lines[1])) {
+            $this->data['RecipientAddress_2_46bc2a61-57f6-4b33-914f-f9fcb441d36f_94b61db7-4742-45c3-a499-42b4fb3701f2']
+                = $lines[1];
+        }
+        if (isset($lines[2])) {
+            $this->data['RecipientAddress_3_46bc2a61-57f6-4b33-914f-f9fcb441d36f_94b61db7-4742-45c3-a499-42b4fb3701f2']
+                = $lines[2];
+        }
 
         return $this;
     }
