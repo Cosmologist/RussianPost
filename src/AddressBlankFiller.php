@@ -204,17 +204,17 @@ class AddressBlankFiller
     /**
      * Set to address (Адрес куда, без индекса)
      *
-     * @param string $address        Address without postal-code
+     * @param string $address Address without postal-code
      * @param string $splitSeparator Address separator char (for splitting addresses by rows)
      *
      * @return $this
      */
     public function setToAddress($address, $splitSeparator = ',')
     {
-        $lineCharsLimit   = 60;
+        $lineCharsLimit = 60;
         $addressSeparator = ', ';
 
-        $line  = '';
+        $line = '';
         $lines = [];
         $parts = explode($splitSeparator, $address);
         foreach ($parts as $part) {
@@ -222,7 +222,7 @@ class AddressBlankFiller
 
             if ((strlen($line) + strlen($part) + strlen($addressSeparator)) > $lineCharsLimit) {
                 $lines[] = $line;
-                $line    = '';
+                $line = '';
             }
 
             if (strlen($line) !== 0) {
@@ -280,6 +280,12 @@ class AddressBlankFiller
     {
         $this->pdf->fillForm($this->data);
 
-        return $this->pdf->saveAs($path);
+        $result = $this->pdf->saveAs($path);
+
+        if ($result === false) {
+            throw new \RuntimeException($this->pdf->getError());
+        }
+
+        return $result;
     }
 }

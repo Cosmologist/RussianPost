@@ -177,6 +177,12 @@ class RemittanceBlankFiller
     {
         $this->pdf->fillForm($this->data);
 
-        return $this->pdf->saveAs($path);
+        $result = $this->pdf->saveAs($path);
+
+        if ($result === false) {
+            throw new \RuntimeException($this->pdf->getError());
+        }
+
+        return $result;
     }
 }
