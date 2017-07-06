@@ -5,12 +5,12 @@ namespace Cosmologist\RussianPost;
 use mikehaertl\pdftk\Pdf;
 
 /**
- * Fill the remittance form (112EP)
+ * Заполнение формы почтового перевода (ф.112ЭП)
  */
 class RemittanceBlankFiller
 {
     /**
-     * Form data
+     * Данные для заполнения формы
      *
      * @var array
      */
@@ -19,7 +19,7 @@ class RemittanceBlankFiller
     ];
 
     /**
-     * Constructor
+     * Конструктор
      */
     public function __construct()
     {
@@ -32,9 +32,9 @@ class RemittanceBlankFiller
     }
 
     /**
-     * Set amount (сумма)
+     * Устанавливает сумму перевода
      *
-     * @param float $amount Amount (сумма)
+     * @param float $amount Сумма перевода
      *
      * @return $this
      */
@@ -48,9 +48,9 @@ class RemittanceBlankFiller
     }
 
     /**
-     * Set remittance (наложенный платеж?)
+     * Устанавливает флаг наложенного платежа
      *
-     * @param bool $remittance Remittance? (наложенный платеж?)
+     * @param bool $remittance Флаг наложенного платежа
      *
      * @return $this
      */
@@ -62,9 +62,9 @@ class RemittanceBlankFiller
     }
 
     /**
-     * Set remittance (наложенный платеж?)
+     * Устанавливает флаг "с доставкой на дом"
      *
-     * @param bool $withDelivery With delivery? (с доставкой?)
+     * @param bool $withDelivery Флаг "с доставкой на дом"
      *
      * @return $this
      */
@@ -76,9 +76,9 @@ class RemittanceBlankFiller
     }
 
     /**
-     * Set remittance (наложенный платеж?)
+     * Устанавливает флаг "C уведомлением"
      *
-     * @param bool $withNotification With notification? (с уведомлением?)
+     * @param bool $withNotification Флаг "с уведомлением"
      *
      * @return $this
      */
@@ -90,51 +90,23 @@ class RemittanceBlankFiller
     }
 
     /**
-     * Set from address (Адрес откуда, без индекса)
+     * Устанавливает ФИО получателя платежа
      *
-     * @param string $address Address without postal-code
+     * @param string $name ФИО получателя платежа
      *
      * @return $this
      */
-    public function setFromAddress($address)
+    public function setToName($name)
     {
-        $this->data['адрес_отправителя'] = $address;
+        $this->data['кому'] = $name;
 
         return $this;
     }
 
     /**
-     * Set from address postal-code (Индекс откуда)
+     * Устанавливает адрес получателя перевода (без индекса)
      *
-     * @param string $code From postal-code
-     *
-     * @return $this
-     */
-    public function setFromAddressPostalCode($code)
-    {
-        $this->data['индекс_адреса_отправителя'] = $code;
-
-        return $this;
-    }
-
-    /**
-     * Set from name (от кого)
-     *
-     * @param string $name Name
-     *
-     * @return $this
-     */
-    public function setFromName($name)
-    {
-        $this->data['от_кого'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Set to address (Адрес куда, без индекса)
-     *
-     * @param string $address Address without postal-code
+     * @param string $address Адрес получателя перевода (без индекса)
      *
      * @return $this
      */
@@ -146,9 +118,9 @@ class RemittanceBlankFiller
     }
 
     /**
-     * Set to address postal-code (Индекс куда)
+     * Устанавливает индекс получателя перевода
      *
-     * @param string $code To postal-code
+     * @param string $code Индекс получателя перевода
      *
      * @return $this
      */
@@ -160,19 +132,114 @@ class RemittanceBlankFiller
     }
 
     /**
-     * Set to name (кому)
+     * Устаналивает ИНН (для получения платежа на банковский счет)
      *
-     * @param string $name Name
+     * @param string $inn ИНН (для получения платежа на банковский счет)
      *
      * @return $this
      */
-    public function setToName($name)
+    public function setInn($inn)
     {
-        $this->data['кому'] = $name;
+
+    }
+
+    /**
+     * Устанавливает кореспондентский счёт (для получения платежа на банковский счет)
+     *
+     * @param string $account Кореспондентский счёт (для получения платежа на банковский счет)
+     *
+     * @return $this
+     */
+    public function setCorrespondentAccount($account)
+    {
+
+    }
+
+    /**
+     * Устанавливает наименование банка (для получения платежа на банковский счет)
+     *
+     * @param string $name Наименование банка (для получения платежа на банковский счет)
+     *
+     * @return $this
+     */
+    public function setBankName($name)
+    {
+
+    }
+
+    /**
+     * Устанавливает расчётный счёт (для получения платежа на банковский счет)
+     *
+     * @param string $account Расчётный счёт (для получения платежа на банковский счет)
+     *
+     * @return $this
+     */
+    public function setAccount($account)
+    {
+
+    }
+
+    /**
+     * Устанавливает БИК (для получения платежа на банковский счет)
+     *
+     * @param string $account БИК (для получения платежа на банковский счет)
+     *
+     * @return $this
+     */
+    public function setBik($bik)
+    {
+
+    }
+
+    /**
+     * Устанавливает адрес отправителя платежа (без индекса)
+     *
+     * @param string $address Адрес отправителя платежа (без индекса)
+     *
+     * @return $this
+     */
+    public function setFromAddress($address)
+    {
+        $this->data['адрес_отправителя'] = $address;
 
         return $this;
     }
 
+    /**
+     * Устанавливает индекс отправителя платежа
+     *
+     * @param string $code Индекс отправителя платежа
+     *
+     * @return $this
+     */
+    public function setFromAddressPostalCode($code)
+    {
+        $this->data['индекс_адреса_отправителя'] = $code;
+
+        return $this;
+    }
+
+    /**
+     * Устанавливает ФИО отправителя платежа
+     *
+     * @param string $name ФИО отправителя платежа
+     *
+     * @return $this
+     */
+    public function setFromName($name)
+    {
+        $this->data['от_кого'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Сохранение заполненной формы
+     *
+     * @param string $path Путь, куда сохранить файл
+     *
+     * @return bool Результат сохранения
+     */
     public function save($path)
     {
         $this->pdf->fillForm($this->data);

@@ -11,6 +11,12 @@ class MoneyString
 {
     /**
      * Возвращает сумму прописью
+     *
+     * @param int|float $amount  Сумма
+     * @param int|float $keepKop Сохранять копейки?
+     *
+     * @return string
+     *
      */
     public static function convert($amount, $keepKop = true)
     {
@@ -50,6 +56,7 @@ class MoneyString
         if ($keepKop) {
             $out[] = $kop . ' ' . self::morph($kop, $unit[0][0], $unit[0][1], $unit[0][2]); // kop
         }
+
         return trim(preg_replace('/ {2,}/', ' ', join(' ', $out)));
     }
 

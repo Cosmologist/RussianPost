@@ -5,12 +5,12 @@ namespace Cosmologist\RussianPost;
 use mikehaertl\pdftk\Pdf;
 
 /**
- * Fill the address form (F7P)
+ * Заполнеие формы адресного ярлыка (ф. 7-п)
  */
 class AddressBlankFiller
 {
     /**
-     * Form data
+     * Данные формы
      *
      * @var array
      */
@@ -19,7 +19,7 @@ class AddressBlankFiller
     ];
 
     /**
-     * Constructor
+     * Конструктов
      */
     public function __construct()
     {
@@ -32,9 +32,9 @@ class AddressBlankFiller
     }
 
     /**
-     * Set parcel flag (Посылка?)
+     * Устанавливает флаг посылки
      *
-     * @param bool $parcel Is parcel? (Посылка?)
+     * @param bool $parcel Флаг посылки
      *
      * @return $this
      */
@@ -46,9 +46,9 @@ class AddressBlankFiller
     }
 
     /**
-     * Set wrapper flag (Бандероль?)
+     * Устанавливает флаг бандероли
      *
-     * @param bool $wrapper Is wrapper? (Бандероль?)
+     * @param bool $wrapper Флаг бандероли
      *
      * @return $this
      */
@@ -60,9 +60,9 @@ class AddressBlankFiller
     }
 
     /**
-     * Set with declared value flag (С объявленной ценностью?)
+     * Устанавливает флаг "С объявленной ценностью"
      *
-     * @param bool $withDeclaredValue With declared value? (С объявленной ценностью?)
+     * @param bool $withDeclaredValue Флаг "С объявленной ценностью"
      *
      * @return $this
      */
@@ -74,9 +74,9 @@ class AddressBlankFiller
     }
 
     /**
-     * Set with cache on delivery flag (С наложенным платежом?)
+     * Устанавливает флаг "С наложенным платежом"
      *
-     * @param bool $withCashOnDelivery With cash on delivery? (С наложенным платежом?)
+     * @param bool $withCashOnDelivery Флаг "С наложенным платежом"
      *
      * @return $this
      */
@@ -88,9 +88,9 @@ class AddressBlankFiller
     }
 
     /**
-     * Set with a list flag (С описью?)
+     * Устанавливает флаг "С описью"
      *
-     * @param bool $withList With a list? (С описью?)
+     * @param bool $withList Флаг "С описью"
      *
      * @return $this
      */
@@ -102,9 +102,9 @@ class AddressBlankFiller
     }
 
     /**
-     * Set with a simple notification (С простым уведомлением?)
+     * Устанавливает флаг "С простым уведомлением"
      *
-     * @param bool $withSimpleNotification With a simple notification? (С простым уведомлением?)
+     * @param bool $withSimpleNotification Флаг "С простым уведомлением"
      *
      * @return $this
      */
@@ -116,9 +116,9 @@ class AddressBlankFiller
     }
 
     /**
-     * Set with a notification (С заказным уведомлением?)
+     * Устанавливает флаг "С заказным уведомлением"
      *
-     * @param bool $withNotification With a notification? (С заказным уведомлением?)
+     * @param bool $withNotification Флаг "С заказным уведомлением"
      *
      * @return $this
      */
@@ -130,9 +130,9 @@ class AddressBlankFiller
     }
 
     /**
-     * Set declared value amount (Сумма объявленной ценности)
+     * Устанавливает сумму объявленной ценности
      *
-     * @param int $amount Declared value amount (Сумма объявленной ценности)
+     * @param int $amount Сумма объявленной ценности
      *
      * @return $this
      */
@@ -145,9 +145,9 @@ class AddressBlankFiller
     }
 
     /**
-     * Set cash on delivery (Сумма наложенного платежа)
+     * Устанавливает сумму наложенного платежа
      *
-     * @param int $amount Cash on delivery (Сумма наложенного платежа)
+     * @param int $amount Сумма наложенного платежа
      *
      * @return $this
      */
@@ -160,13 +160,13 @@ class AddressBlankFiller
     }
 
     /**
-     * Set from address (Адрес откуда, без индекса)
+     * Устанавливает адрес отправителя (без индекса)
      *
-     * @param string $address Address without postal-code
+     * @param string $address Адрес отправителя (без индекса)
      *
      * @return $this
      */
-    public function setFromAddress($address, $splitSeparator = ',')
+    public function setFromAddress($address)
     {
         $this->data['SenderAddress_46bc2a61-57f6-4b33-914f-f9fcb441d36f_94b61db7-4742-45c3-a499-42b4fb3701f2'] = $address;
 
@@ -174,9 +174,9 @@ class AddressBlankFiller
     }
 
     /**
-     * Set from address postal-code (Индекс откуда)
+     * Устанавливает индекс отправителя
      *
-     * @param string $code From postal-code
+     * @param string $code Индекс отправителя
      *
      * @return $this
      */
@@ -188,9 +188,9 @@ class AddressBlankFiller
     }
 
     /**
-     * Set from name (от кого)
+     * Устанавливает ФИО отправителя
      *
-     * @param string $name Name
+     * @param string $name ФИО отправителя
      *
      * @return $this
      */
@@ -202,10 +202,10 @@ class AddressBlankFiller
     }
 
     /**
-     * Set to address (Адрес куда, без индекса)
+     * Устанавливает адрес получателя
      *
-     * @param string $address Address without postal-code
-     * @param string $splitSeparator Address separator char (for splitting addresses by rows)
+     * @param string $address        Адрес получателя
+     * @param string $splitSeparator Символ разделителя в адресе (необходимо для разбиения длинного адреса на несколько строк)
      *
      * @return $this
      */
@@ -249,9 +249,9 @@ class AddressBlankFiller
     }
 
     /**
-     * Set to address postal-code (Индекс куда)
+     * Устанавливает индекс получателя
      *
-     * @param string $code To postal-code
+     * @param string $code Индекс получателя
      *
      * @return $this
      */
@@ -263,9 +263,9 @@ class AddressBlankFiller
     }
 
     /**
-     * Set to name (кому)
+     * Устанавливает ФИО получателя
      *
-     * @param string $name Name
+     * @param string $name ФИО получателя
      *
      * @return $this
      */
@@ -276,6 +276,13 @@ class AddressBlankFiller
         return $this;
     }
 
+    /**
+     * Сохранение заполненной формы
+     *
+     * @param string $path Путь, куда сохранить файл
+     *
+     * @return bool Результат сохранения
+     */
     public function save($path)
     {
         $this->pdf->fillForm($this->data);
