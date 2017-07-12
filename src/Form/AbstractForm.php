@@ -25,6 +25,8 @@ abstract class AbstractForm implements FormInterface
 
     /**
      * Конструктор
+     *
+     * @param string $pdfFormPath Путь в файлу с формой
      */
     public function __construct($pdfFormPath)
     {
