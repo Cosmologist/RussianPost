@@ -1,32 +1,24 @@
 <?php
 
-namespace Cosmologist\RussianPost;
+namespace Cosmologist\RussianPost\Form;
 
-use mikehaertl\pdftk\Pdf;
+use Cosmologist\RussianPost\Form\AbstractForm;
+use Cosmologist\RussianPost\Helper\MoneyString;
 
 /**
  * Заполнение формы почтового перевода (ф.112ЭП)
  */
-class RemittanceBlankFiller
+class RemittanceForm extends AbstractForm
 {
     /**
-     * Данные для заполнения формы
-     *
-     * @var array
-     */
-    protected $data = [
-
-    ];
-
-    /**
-     * Конструктор
+     * {@inheritdoc}
      */
     public function __construct()
     {
-        $this->pdf = new Pdf(
+        parent::__construct(
             __DIR__ . DIRECTORY_SEPARATOR .
             '..' . DIRECTORY_SEPARATOR .
-            'data' . DIRECTORY_SEPARATOR .
+            'bin' . DIRECTORY_SEPARATOR .
             '112EP.pdf'
         );
     }
@@ -231,25 +223,5 @@ class RemittanceBlankFiller
         $this->data['от_кого'] = $name;
 
         return $this;
-    }
-
-    /**
-     * Сохранение заполненной формы
-     *
-     * @param string $path Путь, куда сохранить файл
-     *
-     * @return bool Результат сохранения
-     */
-    public function save($path)
-    {
-        $this->pdf->fillForm($this->data);
-
-        $result = $this->pdf->saveAs($path);
-
-        if ($result === false) {
-            throw new \RuntimeException($this->pdf->getError());
-        }
-
-        return $result;
     }
 }

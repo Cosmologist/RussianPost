@@ -1,32 +1,23 @@
 <?php
 
-namespace Cosmologist\RussianPost;
+namespace Cosmologist\RussianPost\Form;
 
-use mikehaertl\pdftk\Pdf;
+use Cosmologist\RussianPost\Helper\MoneyString;
 
 /**
- * Заполнеие формы адресного ярлыка (ф. 7-п)
+ * Заполнение формы адресного ярлыка (ф. 7-п)
  */
-class AddressBlankFiller
+class AddressForm extends AbstractForm
 {
     /**
-     * Данные формы
-     *
-     * @var array
-     */
-    protected $data = [
-
-    ];
-
-    /**
-     * Конструктов
+     * {@inheritdoc}
      */
     public function __construct()
     {
-        $this->pdf = new Pdf(
+        parent::__construct(
             __DIR__ . DIRECTORY_SEPARATOR .
             '..' . DIRECTORY_SEPARATOR .
-            'data' . DIRECTORY_SEPARATOR .
+            'bin' . DIRECTORY_SEPARATOR .
             'F7P.pdf'
         );
     }
@@ -204,7 +195,7 @@ class AddressBlankFiller
     /**
      * Устанавливает адрес получателя
      *
-     * @param string $address        Адрес получателя
+     * @param string $address Адрес получателя
      * @param string $splitSeparator Символ разделителя в адресе (необходимо для разбиения длинного адреса на несколько строк)
      *
      * @return $this
@@ -274,25 +265,5 @@ class AddressBlankFiller
         $this->data['Recipient_46bc2a61-57f6-4b33-914f-f9fcb441d36f_94b61db7-4742-45c3-a499-42b4fb3701f2'] = $name;
 
         return $this;
-    }
-
-    /**
-     * Сохранение заполненной формы
-     *
-     * @param string $path Путь, куда сохранить файл
-     *
-     * @return bool Результат сохранения
-     */
-    public function save($path)
-    {
-        $this->pdf->fillForm($this->data);
-
-        $result = $this->pdf->saveAs($path);
-
-        if ($result === false) {
-            throw new \RuntimeException($this->pdf->getError());
-        }
-
-        return $result;
     }
 }

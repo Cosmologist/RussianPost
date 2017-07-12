@@ -4,7 +4,6 @@ Russian Post helper library
 Возможности библиотеки:
  - Заполнение формы наложенного платежа (Ф.112-ЭП)
  - Заполнение адресного ярлыка (Ф.7-П)
- - Получение стоимости доставки основываясь на индексе отправителя и индексе получателя, также может учитывать наложенный платеж и страхование посылки. *после очередных изменений на сервере почты России - не работает, можете поправить*
 
 ## Установка
 ```
@@ -15,7 +14,7 @@ composer require "cosmologist/russian-post:dev-master"
 
 ### Заполнение формы наложенного платежа
 ```php
-$filler = new Cosmologist\RussianPost\RemittanceBlankFiller();
+$filler = new Cosmologist\RussianPost\Form\RemittanceForm();
 $filler
     ->setAmount(9872.35) // Сумма наложенного платежа
     ->setRemittance(true) // Флаг "Наложенный платеж"
@@ -34,7 +33,7 @@ $filler->save('/tmp/pdf/1.pdf');
 
 ### Заполнение адресного ярлыка
 ```php
-$filler = new \Cosmologist\RussianPost\AddressBlankFiller();
+$filler = new \Cosmologist\RussianPost\Form\AddressForm();
 $filler
     ->setParcel(true) // Посылка?
     ->setWrapper(true) // Бандероль
@@ -53,17 +52,4 @@ $filler
     ->setToName('Иванов Иван Иванович') // Имя получателя
 
 $filler->save('/tmp/pdf/1.pdf');
-```
-
-### Получение стоимости доставки
-```php
-$rp = new \Cosmologist\RussianPost\Calculator(new GuzzleHttp\Client());
-
-$fromIndex = 107031;
-$toIndex = 614016;
-$weight = 1500;
-$cashOnDeliverySum = 3000;
-$insuranceSum = 3000;
-
-var_dump($rp->calculateCost($fromIndex, $toIndex, $weight, $cashOnDeliverySum, $insuranceSum));
 ```

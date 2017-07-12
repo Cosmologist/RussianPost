@@ -1,6 +1,6 @@
 <?php
 
-namespace Cosmologist\RussianPost;
+namespace Cosmologist\RussianPost\Helper;
 
 /**
  * Сумма прописью
