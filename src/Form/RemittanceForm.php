@@ -18,6 +18,7 @@ class RemittanceForm extends AbstractForm
         parent::__construct(
             __DIR__ . DIRECTORY_SEPARATOR .
             '..' . DIRECTORY_SEPARATOR .
+            '..' . DIRECTORY_SEPARATOR .
             'bin' . DIRECTORY_SEPARATOR .
             '112EP.pdf'
         );
@@ -132,7 +133,9 @@ class RemittanceForm extends AbstractForm
      */
     public function setInn($inn)
     {
+        $this->data['ИНН_получателя'] = $inn;
 
+        return $this;
     }
 
     /**
@@ -144,7 +147,9 @@ class RemittanceForm extends AbstractForm
      */
     public function setCorrespondentAccount($account)
     {
+        $this->data['корреспондентский_счет_получателя'] = $account;
 
+        return $this;
     }
 
     /**
@@ -156,7 +161,9 @@ class RemittanceForm extends AbstractForm
      */
     public function setBankName($name)
     {
+        $this->data['наименование_банка_получателя'] = $name;
 
+        return $this;
     }
 
     /**
@@ -168,7 +175,9 @@ class RemittanceForm extends AbstractForm
      */
     public function setAccount($account)
     {
+        $this->data['расчетный_счет_получателя'] = $account;
 
+        return $this;
     }
 
     /**
@@ -180,7 +189,9 @@ class RemittanceForm extends AbstractForm
      */
     public function setBik($bik)
     {
+        $this->data['БИК_получателя'] = $bik;
 
+        return $this;
     }
 
     /**
