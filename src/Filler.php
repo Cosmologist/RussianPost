@@ -19,13 +19,25 @@ class Filler
     protected $profiles = [];
 
     /**
+     * Конструктор
+     *
+     * @param array $profiles Профили форм
+     */
+    public function __construct(array $profiles = [])
+    {
+        foreach ($profiles as $name => $data) {
+            $this->addProfile($name, $data);
+        }
+    }
+
+    /**
      * Добавления профиля для заполнения формы
      *
      * @param string $name Название профиля
-     * @param array $data Данные профиля в виде ключ-значение
-     *                    Все доступные ключи для каждой формы смотри в README
+     * @param array  $data Данные профиля в виде ключ-значение
+     *                     Все доступные ключи для каждой формы смотри в README
      */
-    public function addProfile($name, $data)
+    public function addProfile($name, array $data)
     {
         $this->profiles[$name] = $data;
     }
@@ -33,8 +45,8 @@ class Filler
     /**
      * Заполнение формы данными из профиля
      *
-     * @param FormInterface $form Объект формы
-     * @param string $profile Имя профиля
+     * @param FormInterface $form    Объект формы
+     * @param string        $profile Имя профиля
      *
      * @return FormInterface Заполненная форма
      */
