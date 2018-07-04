@@ -10,7 +10,7 @@
     "require": {
         "guzzlehttp/guzzle": "^6.1@dev",
         "mikehaertl/php-pdftk": "^0.3.2",
-        "symfony/property-access": "^3.3"
+        "symfony/property-access": "^2.7|^3.0"
     },
     "autoload": {
         "psr-4": {
