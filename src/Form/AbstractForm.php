@@ -44,6 +44,9 @@ abstract class AbstractForm implements FormInterface
             throw new RuntimeException($this->pdf->getError());
         }
 
-        return $this->pdf->getTmpFile()->getFileName();
+        $tmpFile = $this->pdf->getTmpFile();
+        $tmpFile->delete = false;
+
+        return $tmpFile->getFileName();
     }
 }
