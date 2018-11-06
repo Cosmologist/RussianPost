@@ -10,9 +10,7 @@ interface FormInterface
     /**
      * Сохранение заполненной формы
      *
-     * @param string $path Путь, куда сохранить файл
-     *
-     * @return bool Результат сохранения
+     * @return string Путь к файлу с результатом
      */
-    public function save($path);
+    public function generate();
 }

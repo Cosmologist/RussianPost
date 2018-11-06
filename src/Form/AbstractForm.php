@@ -3,6 +3,7 @@
 namespace Cosmologist\RussianPost\Form;
 
 use mikehaertl\pdftk\Pdf;
+use RuntimeException;
 
 /**
  * Абстрактная форма
@@ -36,16 +37,13 @@ abstract class AbstractForm implements FormInterface
     /**
      * {@inheritdoc}
      */
-    public function save($path)
+    public function generate()
     {
-        $this->pdf->fillForm($this->data);
-
-        $result = $this->pdf->saveAs($path);
-
+        $result = $this->pdf->fillForm($this->data)->execute();
         if ($result === false) {
-            throw new \RuntimeException($this->pdf->getError());
+            throw new RuntimeException($this->pdf->getError());
         }
 
-        return $result;
+        return $this->pdf->getTmpFile()->getFileName();
     }
 }
