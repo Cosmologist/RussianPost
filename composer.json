@@ -9,7 +9,7 @@
     "minimum-stability": "dev",
     "require": {
         "guzzlehttp/guzzle": "^6.1@dev",
-        "mikehaertl/php-pdftk": "^0.3.2",
+        "mikehaertl/php-pdftk": "^0.8.0",
         "symfony/property-access": "^3.3"
     },
     "autoload": {
